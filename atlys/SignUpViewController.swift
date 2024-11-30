@@ -15,22 +15,35 @@ class SignupViewController: UIViewController {
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    private let phoneNumberTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter your phone number"
-        textField.borderStyle = .roundedRect
-        textField.keyboardType = .phonePad
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
+    private let sloganLabel: UILabel = {
+        let label = UILabel()
+        label.text = "visas on time"
+        label.font = .systemFont(ofSize: 10, weight: .semibold)
+        label.textColor = .systemIndigo
+        return label
     }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Get Visas\nOn Time"
+        label.font = .systemFont(ofSize: 32, weight: .heavy)
+        label.textColor = .black
+        label.textAlignment = .center
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    let phoneFieldView = PhoneNumberFieldView(selectedCountry: Country(flag: "🇺🇸", code: "+1"))
     
     private let continueButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Continue", for: .normal)
-        button.backgroundColor = .systemBlue
+        button.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
+        button.backgroundColor = .systemIndigo
         button.tintColor = .white
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -67,6 +80,8 @@ class SignupViewController: UIViewController {
         return button
     }()
     
+    let authOptionsView = AuthOptionsView()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,70 +93,70 @@ class SignupViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(logoImageView)
+        view.addSubview(sloganLabel)
         view.addSubview(carousalView)
-        view.addSubview(phoneNumberTextField)
+        view.addSubview(titleLabel)
+        view.addSubview(phoneFieldView)
         view.addSubview(continueButton)
-        view.addSubview(googleLoginButton)
-        view.addSubview(appleLoginButton)
-        view.addSubview(emailPasswordLoginButton)
+        view.addSubview(authOptionsView)
+        
+        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        sloganLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        authOptionsView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(authOptionsView)
+        
+        phoneFieldView.delegate = self
+        phoneFieldView.translatesAutoresizingMaskIntoConstraints = false
         
         carousalView.translatesAutoresizingMaskIntoConstraints = false
+        
         // Add button actions
         continueButton.addTarget(self, action: #selector(continueWithPhoneNumber), for: .touchUpInside)
-        googleLoginButton.addTarget(self, action: #selector(continueWithGoogle), for: .touchUpInside)
-        appleLoginButton.addTarget(self, action: #selector(continueWithApple), for: .touchUpInside)
-        emailPasswordLoginButton.addTarget(self, action: #selector(continueWithEmailPassword), for: .touchUpInside)
+
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoImageView.heightAnchor.constraint(equalToConstant: 48),
+            sloganLabel.topAnchor.constraint(equalTo: logoImageView.bottomAnchor),
+            sloganLabel.centerXAnchor.constraint(equalTo: logoImageView.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            carousalView.topAnchor.constraint(equalTo: logoImageView.topAnchor, constant: 40),
-            carousalView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            carousalView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            carousalView.heightAnchor.constraint(equalToConstant: 210)
+            carousalView.topAnchor.constraint(equalToSystemSpacingBelow: sloganLabel.bottomAnchor, multiplier: 1),
+            carousalView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            view.trailingAnchor.constraint(equalTo: carousalView.trailingAnchor, constant: 20),
+            carousalView.heightAnchor.constraint(equalToConstant: 260)
         ])
         
-        // Phone Number TextField Constraints
         NSLayoutConstraint.activate([
-            phoneNumberTextField.topAnchor.constraint(equalTo: carousalView.bottomAnchor, constant: 40),
-            phoneNumberTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            phoneNumberTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            phoneNumberTextField.heightAnchor.constraint(equalToConstant: 50)
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: carousalView.bottomAnchor, constant: 40)
+        ])
+        
+        NSLayoutConstraint.activate([
+            phoneFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            phoneFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            phoneFieldView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            phoneFieldView.heightAnchor.constraint(equalToConstant: 50)
         ])
         
         // Continue Button Constraints
         NSLayoutConstraint.activate([
-            continueButton.topAnchor.constraint(equalTo: phoneNumberTextField.bottomAnchor, constant: 20),
-            continueButton.leadingAnchor.constraint(equalTo: phoneNumberTextField.leadingAnchor),
-            continueButton.trailingAnchor.constraint(equalTo: phoneNumberTextField.trailingAnchor),
+            continueButton.topAnchor.constraint(equalTo: phoneFieldView.bottomAnchor, constant: 16),
+            continueButton.leadingAnchor.constraint(equalTo: phoneFieldView.leadingAnchor),
+            continueButton.trailingAnchor.constraint(equalTo: phoneFieldView.trailingAnchor),
             continueButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        // Google Login Button Constraints
         NSLayoutConstraint.activate([
-            googleLoginButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 30),
-            googleLoginButton.leadingAnchor.constraint(equalTo: phoneNumberTextField.leadingAnchor),
-            googleLoginButton.trailingAnchor.constraint(equalTo: phoneNumberTextField.trailingAnchor),
-            googleLoginButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        // Apple Login Button Constraints
-        NSLayoutConstraint.activate([
-            appleLoginButton.topAnchor.constraint(equalTo: googleLoginButton.bottomAnchor, constant: 15),
-            appleLoginButton.leadingAnchor.constraint(equalTo: phoneNumberTextField.leadingAnchor),
-            appleLoginButton.trailingAnchor.constraint(equalTo: phoneNumberTextField.trailingAnchor),
-            appleLoginButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        // Email Password Login Button Constraints
-        NSLayoutConstraint.activate([
-            emailPasswordLoginButton.topAnchor.constraint(equalTo: appleLoginButton.bottomAnchor, constant: 30),
-            emailPasswordLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            authOptionsView.topAnchor.constraint(equalTo: continueButton.bottomAnchor),
+            authOptionsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            authOptionsView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            authOptionsView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
@@ -160,5 +175,16 @@ class SignupViewController: UIViewController {
     
     @objc private func continueWithEmailPassword() {
         print("Continue with Email & Password")
+    }
+}
+
+extension SignupViewController: PhoneNumberFieldDelegate {
+    // MARK: - PhoneNumberFieldDelegate
+    func didSelectCountry(_ country: Country) {
+        print("Selected Country: \(country.flag) \(country.code)")
+    }
+    
+    func didUpdatePhoneNumber(_ phoneNumber: String) {
+        print("Phone Number: \(phoneNumber)")
     }
 }

@@ -25,7 +25,7 @@ class CarouselView: UIView {
     
     private var cardViews: [UIView] = []
     private let cardWidth: CGFloat = UIScreen.main.bounds.width - 120
-    private let cardHeight: CGFloat = 200
+    private let cardHeight: CGFloat = 250
     private let minimumScale: CGFloat = 0.8
     
     override init(frame: CGRect) {
@@ -52,7 +52,7 @@ class CarouselView: UIView {
         NSLayoutConstraint.activate([
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.heightAnchor.constraint(equalToConstant: 210),
+            scrollView.heightAnchor.constraint(equalToConstant: 260),
             
             pageControl.centerXAnchor.constraint(equalTo: centerXAnchor),
             pageControl.topAnchor.constraint(equalToSystemSpacingBelow: scrollView.bottomAnchor, multiplier: 1), // Reduced from -20 to -8
@@ -77,7 +77,7 @@ class CarouselView: UIView {
             
             let overlap: CGFloat = 30
             cardView.frame = CGRect(
-                x: CGFloat(index) * (cardWidth - overlap) + 50,
+                x: CGFloat(index) * (cardWidth - overlap) + 60,
                 y: 15,
                 width: cardWidth,
                 height: cardHeight
