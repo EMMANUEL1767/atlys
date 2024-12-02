@@ -108,7 +108,6 @@ class PhoneNumberFieldView: UIView {
     
     // MARK: - Actions
     @objc private func countryButtonTapped() {
-        // Notify delegate to show country picker
         delegate?.didSelectCountry(selectedCountry)
     }
     

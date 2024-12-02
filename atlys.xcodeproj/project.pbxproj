@@ -13,7 +13,7 @@
 		3A49D2012CF4DE89001653E1 /* atlysTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49D2002CF4DE89001653E1 /* atlysTests.swift */; };
 		3A49D20B2CF4DE89001653E1 /* atlysUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49D20A2CF4DE89001653E1 /* atlysUITests.swift */; };
 		3A49D20D2CF4DE89001653E1 /* atlysUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49D20C2CF4DE89001653E1 /* atlysUITestsLaunchTests.swift */; };
-		3A49D21A2CF4DF07001653E1 /* CarousalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49D2192CF4DF07001653E1 /* CarousalViewController.swift */; };
+		3A49D21A2CF4DF07001653E1 /* CarousalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49D2192CF4DF07001653E1 /* CarousalView.swift */; };
 		3A49D21C2CF4E149001653E1 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A49D21B2CF4E149001653E1 /* SignUpViewController.swift */; };
 		3AD1AD892CFB88D9009FBF6F /* PhoneNumberFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1AD882CFB88D9009FBF6F /* PhoneNumberFieldView.swift */; };
 		3AD1AD8B2CFB8904009FBF6F /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1AD8A2CFB8904009FBF6F /* CountryModel.swift */; };
@@ -48,7 +48,7 @@
 		3A49D2062CF4DE89001653E1 /* atlysUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = atlysUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A49D20A2CF4DE89001653E1 /* atlysUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atlysUITests.swift; sourceTree = "<group>"; };
 		3A49D20C2CF4DE89001653E1 /* atlysUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = atlysUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		3A49D2192CF4DF07001653E1 /* CarousalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarousalViewController.swift; sourceTree = "<group>"; };
+		3A49D2192CF4DF07001653E1 /* CarousalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarousalView.swift; sourceTree = "<group>"; };
 		3A49D21B2CF4E149001653E1 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3AD1AD882CFB88D9009FBF6F /* PhoneNumberFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumberFieldView.swift; sourceTree = "<group>"; };
 		3AD1AD8A2CFB8904009FBF6F /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
@@ -107,7 +107,6 @@
 				3AD1AD872CFB88A1009FBF6F /* Components */,
 				3AD1AD5A2CFACF4A009FBF6F /* Files */,
 				3A49D1E92CF4DE88001653E1 /* AppDelegate.swift */,
-				3A49D2192CF4DF07001653E1 /* CarousalViewController.swift */,
 				3A49D21B2CF4E149001653E1 /* SignUpViewController.swift */,
 			);
 			path = atlys;
@@ -152,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				3AD1AD882CFB88D9009FBF6F /* PhoneNumberFieldView.swift */,
+				3A49D2192CF4DF07001653E1 /* CarousalView.swift */,
 				3AD1AD8C2CFB8FCC009FBF6F /* AuthOptionsView.swift */,
 			);
 			name = Components;
@@ -287,7 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A49D21A2CF4DF07001653E1 /* CarousalViewController.swift in Sources */,
+				3A49D21A2CF4DF07001653E1 /* CarousalView.swift in Sources */,
 				3AD1AD8D2CFB8FCC009FBF6F /* AuthOptionsView.swift in Sources */,
 				3A49D1EA2CF4DE88001653E1 /* AppDelegate.swift in Sources */,
 				3A49D21C2CF4E149001653E1 /* SignUpViewController.swift in Sources */,

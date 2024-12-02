@@ -181,28 +181,3 @@ extension CarouselView: UIScrollViewDelegate {
     
 }
 
-
-class CarouselViewController: UIViewController, UIScrollViewDelegate {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let carouselView = CarouselView(frame: view.bounds)
-        view.addSubview(carouselView)
-        
-        // Example images
-        let images = [
-            UIImage(named: "malaysia")!,
-            UIImage(named: "dubai")!,
-            UIImage(named: "india")!,
-            UIImage(named: "malaysia")!,
-            UIImage(named: "dubai")!,
-            UIImage(named: "india")!,
-            UIImage(named: "malaysia")!,
-            UIImage(named: "dubai")!,
-            UIImage(named: "india")!,
-        ]
-        
-        carouselView.configure(with: images)
-        
-    }
-}

@@ -153,7 +153,7 @@ class AuthOptionsView: UIView {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: icon), for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        let padding: CGFloat = 8 // Adjust padding as needed
+        let padding: CGFloat = 8 
         button.contentEdgeInsets = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
         button.backgroundColor = .white
         button.layer.cornerRadius = 12

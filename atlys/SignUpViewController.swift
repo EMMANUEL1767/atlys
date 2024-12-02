@@ -10,7 +10,7 @@ import UIKit
 class SignupViewController: UIViewController {
     
     // MARK: - UI Components
-    private let carousalView = CarouselViewController().view!
+    private let carousalView = CarouselView()
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -50,36 +50,6 @@ class SignupViewController: UIViewController {
         return button
     }()
     
-    private let googleLoginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Continue with Google", for: .normal)
-        button.backgroundColor = .white
-        button.setTitleColor(.black, for: .normal)
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.gray.cgColor
-        button.layer.cornerRadius = 8
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private let appleLoginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Continue with Apple", for: .normal)
-        button.backgroundColor = .black
-        button.tintColor = .white
-        button.layer.cornerRadius = 8
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private let emailPasswordLoginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Login with Email & Password", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
     let authOptionsView = AuthOptionsView()
     
     // MARK: - Lifecycle
@@ -91,6 +61,7 @@ class SignupViewController: UIViewController {
     
     // MARK: - Setup
     private func setupView() {
+        
         view.backgroundColor = .white
         view.addSubview(logoImageView)
         view.addSubview(sloganLabel)
@@ -100,8 +71,25 @@ class SignupViewController: UIViewController {
         view.addSubview(continueButton)
         view.addSubview(authOptionsView)
         
+        
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         sloganLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let images = [
+            UIImage(named: "malaysia")!,
+            UIImage(named: "dubai")!,
+            UIImage(named: "india")!,
+            UIImage(named: "malaysia")!,
+            UIImage(named: "dubai")!,
+            UIImage(named: "india")!,
+            UIImage(named: "malaysia")!,
+            UIImage(named: "dubai")!,
+            UIImage(named: "india")!,
+        ]
+        
+        carousalView.configure(with: images)
+        carousalView.translatesAutoresizingMaskIntoConstraints = false
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         authOptionsView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(authOptionsView)
@@ -109,14 +97,13 @@ class SignupViewController: UIViewController {
         phoneFieldView.delegate = self
         phoneFieldView.translatesAutoresizingMaskIntoConstraints = false
         
-        carousalView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Add button actions
         continueButton.addTarget(self, action: #selector(continueWithPhoneNumber), for: .touchUpInside)
 
     }
     
     private func setupConstraints() {
+        
+        // Logo constraints
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -125,6 +112,7 @@ class SignupViewController: UIViewController {
             sloganLabel.centerXAnchor.constraint(equalTo: logoImageView.centerXAnchor)
         ])
         
+        // Slogan label constraints
         NSLayoutConstraint.activate([
             carousalView.topAnchor.constraint(equalToSystemSpacingBelow: sloganLabel.bottomAnchor, multiplier: 1),
             carousalView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
@@ -132,16 +120,18 @@ class SignupViewController: UIViewController {
             carousalView.heightAnchor.constraint(equalToConstant: 260)
         ])
         
+        // Title label constraints
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: carousalView.bottomAnchor, constant: 40)
         ])
         
+        // Phone number field constraints
         NSLayoutConstraint.activate([
             phoneFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             phoneFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             phoneFieldView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            phoneFieldView.heightAnchor.constraint(equalToConstant: 50)
+            phoneFieldView.heightAnchor.constraint(equalToConstant: 50),
         ])
         
         // Continue Button Constraints
@@ -152,6 +142,7 @@ class SignupViewController: UIViewController {
             continueButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
+        // Auth options Constraints
         NSLayoutConstraint.activate([
             authOptionsView.topAnchor.constraint(equalTo: continueButton.bottomAnchor),
             authOptionsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -163,18 +154,6 @@ class SignupViewController: UIViewController {
     // MARK: - Actions
     @objc private func continueWithPhoneNumber() {
         print("Continue with Phone Number")
-    }
-    
-    @objc private func continueWithGoogle() {
-        print("Continue with Google")
-    }
-    
-    @objc private func continueWithApple() {
-        print("Continue with Apple")
-    }
-    
-    @objc private func continueWithEmailPassword() {
-        print("Continue with Email & Password")
     }
 }
 
